@@ -8,10 +8,13 @@ Credit: Gaurav Jain - accessed March 4, 2019
 from Blockchain import BlockChain
 import json
 
+from RSA import get_private_key
+from Transaction import Transaction
+
 blockchain = BlockChain()
 
-print(">>>>> Before Mining...")
-print(blockchain.chain)
+# print(">>>>> Before Mining...")
+# print(blockchain.chain)
 
 last_block = blockchain.get_last_block
 last_proof = last_block.proof
@@ -39,14 +42,19 @@ for i in range(5):
     blockchain.create_new_transaction(
         sender="0",
         recipient="address_x" + str(i),
-        amount=1+i,
+        data="hello",
     )
     last_hash = last_block.get_block_hash
     blocks.append(blockchain.create_new_block(proofs[i], last_hash))
 
 
-print(">>>>> After Mining...")
+# print(">>>>> After Mining...")
 # print(blockchain.chain)
+
+
+def create_transaction(blockchain, private_key):
+    first_block = blockchain.chain[1].__dict__.get('transactions')[0]
+    return Transaction(first_block.get('sender'), private_key, first_block.get('recipient'), first_block.get('data'))
 
 
 def get_block():
@@ -61,4 +69,4 @@ def get_block():
     return json_chain
 
 
-print(get_block())
+# if __name__ == '__main__':

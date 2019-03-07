@@ -81,22 +81,22 @@ class BlockChain(object):
 
         return True
 
-    def create_new_transaction(self, sender, recipient, amount):
+    def create_new_transaction(self, sender, recipient, data):
         """
         Create new transaction
         :param sender:
         :type sender:
         :param recipient:
         :type recipient:
-        :param amount:
-        :type amount:
+        :param data:
+        :type data:
         :return:
         :rtype:
         """
         self.current_node_transactions.append({
             'sender': sender,
             'recipient': recipient,
-            'amount': amount
+            'message': data
         })
         return True
 
